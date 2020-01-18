@@ -9,64 +9,76 @@ init()
 class grid:
 
 	def __init__(self,rows, columns):
-		self.rows = rows
-		self.columns = columns
-		self.matrix = np.empty([self.rows,self.columns] ,dtype='str')
-		self.matrix[:] = ' '
-		self.coinshelves = []
-		self.obstacle_h = []
-		self.obstacle_v = []
-		self.obstacle_a = []
+		self.__rows = rows
+		self.__columns = columns
+		self.__matrix = np.empty([self.__rows,self.__columns] ,dtype='str')
+		self.__matrix[:] = ' '
+		self.__coinshelves = []
+		self.__obstacle_h = []
+		self.__obstacle_v = []
+		self.__obstacle_a = []
 
-	def create_roof(self, grid):
-		for i in range(self.columns):
-			grid[0][i] = '^'
-			grid[1][i] = '-' 
+	def set_grid(self,r,c,x):
+		self.__matrix[r][c] = x
 
-	def create_floor(self, grid):
-		for i in range(self.columns):
-			grid[28][i] = '_'
-			grid[29][i] = '^' 		
+	def get_grid(self,r,c):
+		return self.__matrix[r][c]
+
+	def get_grid_rows(self):
+		return self.__rows
+
+	def get_grid_columns(self):
+		return self.__columns				
+
+	def create_roof(self):
+		for i in range(self.__columns):
+			self.__matrix[0][i] = '^'
+			self.__matrix[1][i] = '-' 
+
+	def create_floor(self):
+		for i in range(self.__columns):
+			self.__matrix[28][i] = '_'
+			self.__matrix[29][i] = '^' 		
 
 
-	def create_coinshelves(self,grid):
+	def create_coinshelves(self):
 		random.seed(a=None, version=2)
 		coinshelves_num = randint(20,30)
 		for _ in range(coinshelves_num):
-			self.coinshelves.append([randint(2, 27),randint(10, 450)])
+			self.__coinshelves.append([randint(2, 27),randint(10, 450)])
 
 		for i in range(coinshelves_num):
 			for j in range(6):
-				grid[self.coinshelves[i][0]][self.coinshelves[i][1] + j] = '$'			
+				self.__matrix[self.__coinshelves[i][0]][self.__coinshelves[i][1] + j] = '$'			
 
-	def create_obstacles_v(self,grid):
+	def create_obstacles_v(self):
 		random.seed(a=None, version=2)
 		obs_vnum = randint(7,12)
 		for _ in range(obs_vnum):
-			self.obstacle_v.append([randint(3, 24),randint(10, 450)])
+			self.__obstacle_v.append([randint(3, 24),randint(10, 450)])
 
 		for i in range(obs_vnum):
 			for j in range(4):
-				grid[self.obstacle_v[i][0] + j][self.obstacle_v[i][1]] = '*'	
+				self.__matrix[self.__obstacle_v[i][0] + j][self.__obstacle_v[i][1]] = '*'	
 
-	def create_obstacles_h(self,grid):
+	def create_obstacles_h(self):
 		random.seed(a=None, version=2)
 		obs_hnum = randint(7,12)
 		for _ in range(obs_hnum):
-			self.obstacle_h.append([randint(2, 27),randint(10, 450)])
+			self.__obstacle_h.append([randint(2, 27),randint(10, 450)])
 
 		for i in range(obs_hnum):
 			for j in range(4):
-				grid[self.obstacle_h[i][0]][self.obstacle_h[i][1] + j] = '*'			
+				self.__matrix[self.__obstacle_h[i][0]][self.__obstacle_h[i][1] + j] = '*'			
 
-	def create_obstacles_a(self,grid):
+	def create_obstacles_a(self):
 		random.seed(a=None, version=2)
 		obs_anum = randint(7,12)
 		for _ in range(obs_anum):
-			self.obstacle_a.append([randint(3, 24),randint(10, 450)])
+			self.__obstacle_a.append([randint(3, 24),randint(10, 450)])
 
 		for i in range(obs_anum):
 			for j in range(4):
-				grid[self.obstacle_a[i][0] + j][self.obstacle_a[i][1] + j] = '*'			 	
+				self.__matrix[self.__obstacle_a[i][0] + j][self.__obstacle_a[i][1] + j] = '*'			 	
 
 
