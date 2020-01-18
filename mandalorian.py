@@ -16,14 +16,20 @@ class mandalorian(person):
 		self.__design_shield = [["|","O","|","#"],[" ","|"," ","#"],["|"," ","|","#"]]
 		self.__lives = 5
 		self.__coins = 0
-		self.__shield = 0 
+		self.__shield = 0
+		self.__shield_start_time = 0
+		self.__shield_end_time = 0
+		self.__shield_available = 1
+		self.__shield_max_time = 20
+		self.__shield_max_wait_time = 40
+
 
 	
 	def initial_placement(self,obj_grid): 
-
-		for i in range(25,28):
+		rows = obj_grid.get_grid_rows()
+		for i in range(self._r,self._r+3):
 			for j in range(0,3):
-				obj_grid.set_grid(i,j,self.__design[i-25][j])
+				obj_grid.set_grid(i,j,self.__design[i- rows + 6][j])
 
 	def disappear_mandalorian(self,obj_grid):
 		if self.__shield == 0:
@@ -68,11 +74,24 @@ class mandalorian(person):
 	def change_row(self,n):
 		self._r += n					
 
-	def toggle_shield(self):
-		if self.__shield == 1:
+	def activate_shield(self,time):
+		if self.__shield_available == 1:
+			self.__shield = 1
+			self.__shield_available = 0
+			self.__shield_start_time = time
+
+
+	def check_shield(self,time):
+		if self.__shield == 1 and (time - self.__shield_start_time) > self.__shield_max_time:
 			self.__shield = 0
-		elif self.__shield == 0:
-			self.__shield = 1													
+			self.__shield_end_time = time
+
+		if self.__shield == 0 and (time - self.__shield_end_time) > self.__shield_max_wait_time:
+			self.__shield_available = 1
+
+	def get_shield_availability(self):
+		return self.__shield_available			
+
 
 	def check_coin_collision(self,obj_grid):
 		if self.__shield == 0:
@@ -87,29 +106,37 @@ class mandalorian(person):
 					if obj_grid.get_grid(i,j) == '$':
 						self.__coins = self.__coins + 1	
 
-	def check_obstacle_collision(self,obj_grid,start):
+	def check_obstacle_collision(self,obj_grid,start,time):
+		flag = 0
 		if self.__shield == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
 					if obj_grid.get_grid(i,j) == '*':
-						self.__lives = self.__lives - 1
-						for ii in range(obj_grid.get_grid_rows()-1):
-							for jj in range(start,141+start):
-								if obj_grid.get_grid(ii,jj) == '*':
-									obj_grid.set_grid(ii,jj," ")
+						if flag == 0:
+							flag = 1
+							self.__lives = self.__lives - 1
+							for ii in range(obj_grid.get_grid_rows()-1):
+								for jj in range(j-4,50+j):
+									if obj_grid.get_grid(ii,jj) == '*':
+										obj_grid.set_grid(ii,jj," ")								
 
 
 		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					if obj_grid.get_grid(i,j) == '*':
-						for ii in range(8):
-							for jj in range(8):
-								if (i-4 + ii)> -1 and (i-4 + ii) < 31 and (j-4+jj) > -1 and (j-4+jj) < 501 :
-									if obj_grid.get_grid(i-4 + ii,j-4 + jj) == '*':
-										obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
+						if flag == 0: 
+							flag = 1
+							self.__shield_end_time = time
+							for ii in range(8):
+								for jj in range(8):
+									if (i-4 + ii)> -1 and (i-4 + ii) < obj_grid.get_grid_rows() + 1 and (j-4+jj) > -1 and (j-4+jj) < obj_grid.get_grid_columns()  :
+										if obj_grid.get_grid(i-4 + ii,j-4 + jj) == '*':
+											obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
 
-						self.__shield = 0																		 
+							self.__shield = 0
+
+		flag = 0																							 
 
 																
 

@@ -37,8 +37,8 @@ class grid:
 
 	def create_floor(self):
 		for i in range(self.__columns):
-			self.__matrix[28][i] = '_'
-			self.__matrix[29][i] = '^' 				
+			self.__matrix[self.__rows - 3][i] = '_'
+			self.__matrix[self.__rows - 2][i] = '^' 				
 		 	
 
 
