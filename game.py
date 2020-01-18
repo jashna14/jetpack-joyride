@@ -11,16 +11,22 @@ init()
 from grid import *
 from mandalorian import *
 from input import *
+from object import *
 
 obj_grid = grid(31,500)
 obj_grid.create_roof()
 obj_grid.create_floor()
 obj_mandalorian = mandalorian(25,0)
 obj_mandalorian.initial_placement(obj_grid)
-obj_grid.create_coinshelves()
-obj_grid.create_obstacles_v()
-obj_grid.create_obstacles_h()
-obj_grid.create_obstacles_a()
+obj_coinshelves = coin_shelves()
+obj_coinshelves.create_coinshelves(obj_grid)
+obj_firebeam_h = firebeam_h()
+obj_firebeam_h.create_firebeam_h(obj_grid)
+obj_firebeam_v = firebeam_v()
+obj_firebeam_v.create_firebeam_v(obj_grid)
+obj_firebeam_a = firebeam_a()
+obj_firebeam_a.create_firebeam_a(obj_grid)
+
 
 start = 0
 
