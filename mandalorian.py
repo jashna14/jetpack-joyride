@@ -13,7 +13,9 @@ class mandalorian(person):
 	def __init__(self,r,c):
 		person.__init__(self,r,c)
 		self.__design = [["|","O","|"],[" ","|"," "],["|"," ","|"]]
+		self.__design_jet = [["|","O","|"],[" ","|"," "],["M"," ","M"]]
 		self.__design_shield = [["|","O","|","#"],[" ","|"," ","#"],["|"," ","|","#"]]
+		self.__design_shield_jet = [["|","O","|","#"],[" ","|"," ","#"],["M"," ","M","#"]]
 		self.__lives = 5
 		self.__coins = 0
 		self.__shield = 0
@@ -22,6 +24,10 @@ class mandalorian(person):
 		self.__shield_available = 1
 		self.__shield_max_time = 20
 		self.__shield_max_wait_time = 40
+		self.__powerup = 0
+		self.__powerup_start_time = 0
+		self.__powerup_max_time = 20
+
 
 
 	
@@ -42,13 +48,22 @@ class mandalorian(person):
 				for j in range(self._c,self._c+4):
 					obj_grid.set_grid(i,j," ")			
 
-	def reappear_mandalorian(self,obj_grid):
-		if self.__shield == 0:
+	def reappear_mandalorian(self,obj_grid,jet):
+		if self.__shield == 0 and jet == 1:
+			for i in range(self._r,self._r+3):
+				for j in range(self._c,self._c+3):
+					obj_grid.set_grid(i,j,self.__design_jet[i-self._r][j-self._c])
+		if self.__shield == 0 and jet == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
 					obj_grid.set_grid(i,j,self.__design[i-self._r][j-self._c])
 		
-		if self.__shield == 1:
+		if self.__shield == 1 and jet == 1:
+			for i in range(self._r,self._r+3):
+				for j in range(self._c,self._c+3):
+					obj_grid.set_grid(i,j,self.__design_shield_jet[i-self._r][j-self._c])						
+		
+		if self.__shield == 1 and jet == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					obj_grid.set_grid(i,j,self.__design_shield[i-self._r][j-self._c])					
@@ -82,11 +97,11 @@ class mandalorian(person):
 
 
 	def check_shield(self,time):
-		if self.__shield == 1 and (time - self.__shield_start_time) > self.__shield_max_time:
+		if self.__shield == 1 and (self.__shield_start_time - time) > self.__shield_max_time:
 			self.__shield = 0
 			self.__shield_end_time = time
 
-		if self.__shield == 0 and (time - self.__shield_end_time) > self.__shield_max_wait_time:
+		if self.__shield == 0 and (self.__shield_end_time - time)  > self.__shield_max_wait_time:
 			self.__shield_available = 1
 
 	def get_shield_availability(self):
@@ -100,11 +115,46 @@ class mandalorian(person):
 					if obj_grid.get_grid(i,j) == '$':
 						self.__coins = self.__coins + 1
 
-		if self.__shield == 1:
+		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					if obj_grid.get_grid(i,j) == '$':
 						self.__coins = self.__coins + 1	
+
+	def check_powerup_collision(self,obj_grid,time):
+		flag = 0
+		if self.__shield == 0:
+			for i in range(self._r,self._r+3):
+				for j in range(self._c,self._c+3):
+					if obj_grid.get_grid(i,j) == '@' and flag == 0:
+						flag = 1
+						self.__powerup = 1
+						self.__powerup_start_time = time
+						for ii in range(4):
+								for jj in range(4):
+									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns():
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == '@':
+											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
+
+		elif self.__shield == 1:
+			for i in range(self._r,self._r+3):
+				for j in range(self._c,self._c+4):
+					if obj_grid.get_grid(i,j) == '@' and flag == 0:
+						flag = 1
+						self.__powerup = 1
+						self.__powerup_start_time = time
+						for ii in range(4):
+								for jj in range(4):
+									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns()  :
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == '@':
+											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
+
+	def check_powerup(self,time):
+		if	self.__powerup_start_time - time > self.__powerup_max_time:
+			self.__powerup = 0
+
+	def get_powerup_status(self,time):
+		return self.__powerup											
 
 	def check_obstacle_collision(self,obj_grid,start,time):
 		flag = 0
@@ -115,6 +165,7 @@ class mandalorian(person):
 						if flag == 0:
 							flag = 1
 							self.__lives = self.__lives - 1
+							self.__powerup = 0
 							for ii in range(obj_grid.get_grid_rows()-1):
 								for jj in range(j-4,50+j):
 									if obj_grid.get_grid(ii,jj) == '*':

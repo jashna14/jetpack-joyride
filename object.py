@@ -51,13 +51,27 @@ class firebeam(object):
 					obj_grid.set_grid(self._position[i][0] + j,self._position[i][1] + j,"*")		
 
 
-# class powerup(object):
-# 	def __init__(self):
-# 			object.__init__(self)
+class powerup(object):
+	def __init__(self):
+			object.__init__(self)
 
 
-# 	def create_powerup(self,obj_grid,screen_columns,cnt):
-# 		random.seed(a=None, version=2)
+	def create_powerup(self,obj_grid,screen_columns,cnt):
+		random.seed(a=None, version=2)
+		grid_columns = obj_grid.get_grid_columns()
+		grid_rows  = obj_grid.get_grid_rows()
+		count = 0
+		for i in range(cnt):
+			if 1*(i+1)*screen_columns < grid_columns - 2*screen_columns:
+				self._position.append([randint(2, grid_rows - 6) , randint(i*1*screen_columns, 1*(i+1)*screen_columns)])
+				count +=  1
+
+		for i in range(count):
+			if 	obj_grid.get_grid(self._position[i][0],self._position[i][1]) != '*' and obj_grid.get_grid(self._position[i][0],self._position[i][1]+1) != '*':
+				obj_grid.set_grid(self._position[i][0],self._position[i][1],'@')				
+				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , '@')				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] ,  '@')				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] + 1, '@')				
 		
 				
 
