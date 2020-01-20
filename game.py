@@ -5,7 +5,7 @@ import sys
 import tty
 import termios
 import numpy as np
-from colorama import init, Fore
+from colorama import init, Fore , Style , Back
 init()
 
 from grid import *
@@ -16,7 +16,7 @@ from boss_enemy import *
 
 screen_rows = 30
 screen_columns = 141
-grid_columns = 300
+grid_columns = 500
 obj_grid = grid(screen_rows,grid_columns)
 obj_grid.create_roof()
 obj_grid.create_floor()

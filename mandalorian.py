@@ -1,4 +1,4 @@
-from colorama import init, Fore
+from colorama import init, Fore , Style
 from grid import *
 from bullet import *
 init()
@@ -137,13 +137,13 @@ class mandalorian(person):
 		if self.__shield == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
-					if obj_grid.get_grid(i,j) == '$':
+					if obj_grid.get_grid(i,j) == Fore.YELLOW + Style.BRIGHT + '$' + Fore.WHITE + Style.RESET_ALL:
 						self.__coins = self.__coins + 1
 
 		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
-					if obj_grid.get_grid(i,j) == '$':
+					if obj_grid.get_grid(i,j) == Fore.YELLOW + Style.BRIGHT + '$' + Fore.WHITE + Style.RESET_ALL:
 						self.__coins = self.__coins + 1	
 
 	def check_powerup_collision(self,obj_grid,time):
@@ -151,27 +151,27 @@ class mandalorian(person):
 		if self.__shield == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
-					if obj_grid.get_grid(i,j) == '@' and flag == 0:
+					if obj_grid.get_grid(i,j) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
 						flag = 1
 						self.__powerup = 1
 						self.__powerup_start_time = time
 						for ii in range(4):
 								for jj in range(4):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns():
-										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == '@':
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
 
 		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
-					if obj_grid.get_grid(i,j) == '@' and flag == 0:
+					if obj_grid.get_grid(i,j) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
 						flag = 1
 						self.__powerup = 1
 						self.__powerup_start_time = time
 						for ii in range(4):
 								for jj in range(4):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns()  :
-										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == '@':
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
 
 	def check_powerup(self,time):

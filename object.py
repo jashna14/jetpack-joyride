@@ -1,6 +1,6 @@
 import os
 import random
-from colorama import init, Fore
+from colorama import init, Fore , Style , Back
 from random import seed
 from random import randint
 import numpy as np
@@ -22,7 +22,7 @@ class coin_shelves(object):
 
 		for i in range(coinshelves_num):
 			for j in range(6):
-				obj_grid.set_grid(self._position[i][0],self._position[i][1] + j,"$")
+				obj_grid.set_grid(self._position[i][0],self._position[i][1] + j,Fore.YELLOW + Style.BRIGHT + "$" + Fore.WHITE + Style.RESET_ALL)
 
 class firebeam(object):
 	def __init__(self):
@@ -42,13 +42,13 @@ class firebeam(object):
 		for i in range(count):
 			if self._position[i][2] == 0:
 				for j in range(4):
-					obj_grid.set_grid(self._position[i][0],self._position[i][1] + j,"*")
+					obj_grid.set_grid(self._position[i][0],self._position[i][1] + j,'*')
 			elif self._position[i][2] == 1:
 				for j in range(4):
-					obj_grid.set_grid(self._position[i][0] + j,self._position[i][1],"*")
+					obj_grid.set_grid(self._position[i][0] + j,self._position[i][1],'*')
 			elif self._position[i][2] == 2:
 				for j in range(4):
-					obj_grid.set_grid(self._position[i][0] + j,self._position[i][1] + j,"*")		
+					obj_grid.set_grid(self._position[i][0] + j,self._position[i][1] + j,'*')		
 
 
 class powerup(object):
@@ -70,10 +70,10 @@ class powerup(object):
 					i -= 1	
 
 		for i in range(count):
-				obj_grid.set_grid(self._position[i][0],self._position[i][1],'@')				
-				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , '@')				
-				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] ,  '@')				
-				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] + 1, '@')				
+				obj_grid.set_grid(self._position[i][0],self._position[i][1],Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] ,  Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] + 1, Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
 		
 				
 
