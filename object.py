@@ -63,14 +63,12 @@ class powerup(object):
 		count = 0
 		for i in range(cnt):
 			if 1*(i)*screen_columns < grid_columns - 2*screen_columns:
-				print(i)
 				self._position.append([randint(2, grid_rows - 6) , randint((i*1*screen_columns), (1*(i+1)*screen_columns))])
 				if 	obj_grid.get_grid(self._position[i][0],self._position[i][1]) != '*' and obj_grid.get_grid(self._position[i][0],self._position[i][1]+1) != '*':
 					count +=  1
 				else:
 					i -= 1	
 
-		# print(self._position)
 		for i in range(count):
 				obj_grid.set_grid(self._position[i][0],self._position[i][1],'@')				
 				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , '@')				

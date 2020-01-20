@@ -33,7 +33,7 @@ obj_powerup.create_powerup(obj_grid,screen_columns,8)
 
 
 start = 0
-vir_time = 600
+vir_time = 300
 last_up_time = 0
 
 def move_mandalorian():
@@ -164,12 +164,25 @@ while obj_mandalorian.get_lives() and (vir_time//1 > 0) and obj_boss_enemy.get_l
 
 	print("\033[0;0H",end = "")
 	st=""
-	for i in range(obj_grid.get_grid_rows()-1):
+	for i in range(obj_grid.get_grid_rows()):
 		for j in range(start,screen_columns+start):
 			st += obj_grid.get_grid(i,j)
 		st+="\n"
-	st = st + "coins = " + 	str(obj_mandalorian.get_coins()) + "  " + "lives = " + str(obj_mandalorian.get_lives()) +  "  " + "enemy_lives = " + str(obj_boss_enemy.get_lives()) +  "  " + "time remaining = " + str(vir_time//1) + "  " + "shield = " + str(obj_mandalorian.get_shield_availability()) + "\n"
-	print(st)
+	print(st)	
+	print("\033[0K",end = "")
+	st1 = ""	
+	st1 = st1 + "💵 :" + 	str(obj_mandalorian.get_coins()) + "  " + "lives = " 
+	for i in range(obj_mandalorian.get_lives()):
+		st1 = st1 + '❤️  '
+	for i in range(obj_mandalorian.get_max_lives() - obj_mandalorian.get_lives()):
+		st1 = st1 + '   '	
+	st1 = st1 + " " + "enemy_lives = "
+	for i in range(obj_boss_enemy.get_lives()):
+		st1 = st1 + '❤️  '
+	for i in range(obj_boss_enemy.get_max_lives() - obj_boss_enemy.get_lives()):
+		st1 = st1 + '   '	 
+	st1 = st1 +  "  " + "time remaining = " + str(vir_time//1) + "  " + "shield = " + str(obj_mandalorian.get_shield_availability()) + "\n"
+	print(st1)
 	move_mandalorian()
 	obj_boss_enemy.move_boss_enemy(obj_grid,obj_mandalorian)
 

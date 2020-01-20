@@ -25,6 +25,7 @@ class mandalorian(person):
 		self.__design_jet = [["|","O","|"],[" ","|"," "],["M"," ","M"]]
 		self.__design_shield = [["|","O","|","#"],[" ","|"," ","#"],["|"," ","|","#"]]
 		self.__design_shield_jet = [["|","O","|","#"],[" ","|"," ","#"],["M"," ","M","#"]]
+		self.__max_lives = 5
 		self.__lives = 5
 		self.__coins = 0
 		self.__shield = 0
@@ -84,6 +85,9 @@ class mandalorian(person):
 
 	def get_lives(self):
 		return self.__lives
+
+	def get_max_lives(self):
+		return self.__max_lives	
 
 	def get_shield(self):
 		return self.__shield

@@ -9,8 +9,9 @@ import os
 class boss_enemy(person):
 	def __init__(self,r,c):
 		person.__init__(self,r,c)
-		self.__design = [[' ', '/', '-', '-', '\\', ' '],['{', '(', 'O', 'O', ')', '}'],[' ', '~', '}', '{', '~', ' '],]
+		self.__design = [[' ', ' ', 'M', 'M', ' ', ' '],['<', '[', 'W', 'W', ']', '>'],[' ', '~', '}', '{', '~', ' '],]
 		self.__lives = 5
+		self.__max_lives = 5
 		self.__bullets = []
 
 
@@ -58,6 +59,9 @@ class boss_enemy(person):
 
 	def get_lives(self):
 		return self.__lives
+
+	def get_max_lives(self):
+		return self.__max_lives	
 
 	def dec_life(self):	
 		self.__lives -= 1

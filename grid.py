@@ -11,8 +11,6 @@ class grid:
 	def __init__(self,rows, columns):
 		self.__rows = rows
 		self.__columns = columns
-		# self.__matrix = np.empty([self.__rows,self.__columns] ,dtype='str')
-		# self.__matrix[:] = ' '
 		self.__matrix = [[" " for i in range(self.__columns)]for j in range(self.__rows)]
 		self.__coinshelves = []
 		self.__obstacle_h = []
@@ -33,13 +31,43 @@ class grid:
 
 	def create_roof(self):
 		for i in range(self.__columns):
-			self.__matrix[0][i] = Fore.RED + '^' + Fore.WHITE	
-			self.__matrix[1][i] = '-' 
+			if i % 2 == 0:
+				self.__matrix[0][i] = Fore.RED + '(' + Fore.WHITE
+			elif i % 2 == 1:
+				self.__matrix[0][i] = Fore.RED + ')' + Fore.WHITE
+
+		for i in range(self.__columns):
+			self.__matrix[1][i] = Fore.RED + '-' + Fore.WHITE		
+		
+		# for i in range(self.__columns):
+		# 	self.__matrix[0][i] = Fore.RED + '_' + Fore.WHITE		
+		# 	self.__matrix[1][i] = Fore.RED + '_' + Fore.WHITE		
+
 
 	def create_floor(self):
 		for i in range(self.__columns):
-			self.__matrix[self.__rows - 3][i] = '_'
-			self.__matrix[self.__rows - 2][i] = '^' 				
+			if i % 3 == 0:
+				self.__matrix[self.__rows - 3][i] = Fore.YELLOW + '_' + Fore.WHITE
+			elif i % 3 == 1:
+				self.__matrix[self.__rows - 3][i] = Fore.YELLOW + '_' + Fore.WHITE
+			elif i % 3 == 2:
+				self.__matrix[self.__rows - 3][i] = Fore.YELLOW + '_' + Fore.WHITE		
+
+		for i in range(self.__columns):
+			if i % 3 == 0:
+				self.__matrix[self.__rows - 2][i] = Fore.RED + '_' + Fore.WHITE
+			elif i % 3 == 1:
+				self.__matrix[self.__rows - 2][i] = Fore.RED + '_' + Fore.WHITE
+			elif i % 3 == 2:
+				self.__matrix[self.__rows - 2][i] = Fore.RED + '|' + Fore.WHITE
+
+		for i in range(self.__columns):
+			if i % 3 == 0:
+				self.__matrix[self.__rows - 1][i] = Fore.RED + '_' + Fore.WHITE
+			elif i % 3 == 1:
+				self.__matrix[self.__rows - 1][i] = Fore.RED + '|' + Fore.WHITE
+			elif i % 3 == 2:
+				self.__matrix[self.__rows - 1][i] = Fore.RED + '_' + Fore.WHITE							
 		 	
 
 
