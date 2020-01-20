@@ -16,7 +16,7 @@ from boss_enemy import *
 
 screen_rows = 30
 screen_columns = 141
-grid_columns = 1000
+grid_columns = 300
 obj_grid = grid(screen_rows,grid_columns)
 obj_grid.create_roof()
 obj_grid.create_floor()
@@ -124,9 +124,19 @@ while obj_mandalorian.get_lives() and (vir_time//1 > 0) and obj_boss_enemy.get_l
 		if tt - prev_time > 60 :
 			prev_time = tt
 			if obj_mandalorian.get_powerup_status(vir_time//1):
-				start = start + 3
-				obj_mandalorian.disappear_mandalorian(obj_grid)
-				obj_mandalorian.change_column(+3)		
+				if start + 3 < obj_grid.get_grid_columns() - screen_columns + 1:
+					start = start + 3
+					obj_mandalorian.disappear_mandalorian(obj_grid)
+					obj_mandalorian.change_column(+3)
+				elif start + 2 < obj_grid.get_grid_columns() - screen_columns + 1:
+					start = start + 2
+					obj_mandalorian.disappear_mandalorian(obj_grid)
+					obj_mandalorian.change_column(+2)
+
+				elif start + 1 < obj_grid.get_grid_columns() - screen_columns + 1:
+					start = start + 1
+					obj_mandalorian.disappear_mandalorian(obj_grid)
+					obj_mandalorian.change_column(+1)												
 			else:
 				start = start + 1 	
 				obj_mandalorian.disappear_mandalorian(obj_grid)
