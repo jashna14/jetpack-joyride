@@ -182,7 +182,7 @@ while obj_mandalorian.get_lives() and (vir_time//1 > 0) and obj_boss_enemy.get_l
 	for i in range(obj_boss_enemy.get_max_lives() - obj_boss_enemy.get_lives()):
 		st1 = st1 + '   '	 
 	st1 = st1 +  "  " + "time remaining = " + str(vir_time//1) + "  " + "shield = " + str(obj_mandalorian.get_shield_availability()) + "\n"
-	print(st1)
+	print(st1,end = "\r")
 	move_mandalorian()
 	obj_boss_enemy.move_boss_enemy(obj_grid,obj_mandalorian)
 

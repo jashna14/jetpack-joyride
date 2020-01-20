@@ -32,9 +32,9 @@ class grid:
 	def create_roof(self):
 		for i in range(self.__columns):
 			if i % 2 == 0:
-				self.__matrix[0][i] = Fore.RED + Style.BRIGHT + '(' + Style.RESET_ALL
+				self.__matrix[0][i] = Fore.RED + Style.BRIGHT + '#' + Style.RESET_ALL
 			elif i % 2 == 1:
-				self.__matrix[0][i] = Fore.RED + Style.BRIGHT + ')' + Style.RESET_ALL
+				self.__matrix[0][i] = Fore.RED + Style.BRIGHT + '#' + Style.RESET_ALL
 
 		for i in range(self.__columns):
 			self.__matrix[1][i] = Fore.RED + Style.BRIGHT + '-' + Style.RESET_ALL			

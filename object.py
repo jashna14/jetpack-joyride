@@ -70,10 +70,10 @@ class powerup(object):
 					i -= 1	
 
 		for i in range(count):
-				obj_grid.set_grid(self._position[i][0],self._position[i][1],Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
-				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
-				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] ,  Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
-				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] + 1, Fore.BLUE + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0],self._position[i][1],Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0],self._position[i][1] + 1 , Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] ,  Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL)				
+				obj_grid.set_grid(self._position[i][0] + 1,self._position[i][1] + 1, Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL)				
 		
 				
 

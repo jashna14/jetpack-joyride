@@ -20,7 +20,7 @@ class bullet:
 
 	def reappear_bullet(self,obj_grid):
 		current_char = obj_grid.get_grid(self.__r,self.__c)
-		if current_char == Fore.YELLOW + Style.BRIGHT + "$" + Fore.WHITE + Style.RESET_ALL or current_char == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL:
+		if current_char == Fore.YELLOW + Style.BRIGHT + "$" + Fore.WHITE + Style.RESET_ALL or current_char == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
 			self.__previous = current_char
 		else:
 			self.__previous = ' '

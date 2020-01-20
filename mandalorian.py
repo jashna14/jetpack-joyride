@@ -10,6 +10,9 @@ class person:
 		self._r = r
 		self._c = c
 		self._design = [["|","O","|"],[" ","|"," "],["|"," ","|"]]
+		for i in range(3):
+			for j in range(3):
+				self._design[i][j] = Fore.GREEN + Style.BRIGHT + self._design[i][j] + Style.RESET_ALL
 
 
 	def initial_placement(self,obj_grid): 
@@ -39,7 +42,14 @@ class mandalorian(person):
 		self.__powerup_max_time = 20
 		self.__bullets = []
 
+		for i in range(3):
+			for j in range(3):
+				self.__design_jet[i][j] = Fore.GREEN + Style.BRIGHT + self.__design_jet[i][j] + Style.RESET_ALL
 
+		for i in range(3):
+			for j in range(4):
+				self.__design_shield_jet[i][j] = Fore.GREEN + Style.BRIGHT + self.__design_shield_jet[i][j] + Style.RESET_ALL		
+				self.__design_shield[i][j] = Fore.GREEN + Style.BRIGHT + self.__design_shield[i][j] + Style.RESET_ALL		
 
 	
 	# def initial_placement(self,obj_grid): 
@@ -151,27 +161,27 @@ class mandalorian(person):
 		if self.__shield == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
-					if obj_grid.get_grid(i,j) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
+					if obj_grid.get_grid(i,j) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
 						flag = 1
 						self.__powerup = 1
 						self.__powerup_start_time = time
 						for ii in range(4):
 								for jj in range(4):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns():
-										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL:
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
 
 		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
-					if obj_grid.get_grid(i,j) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
+					if obj_grid.get_grid(i,j) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL and flag == 0:
 						flag = 1
 						self.__powerup = 1
 						self.__powerup_start_time = time
 						for ii in range(4):
 								for jj in range(4):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns()  :
-										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.BLUE + Style.BRIGHT + '@' + Style.RESET_ALL:
+										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
 
 	def check_powerup(self,time):
