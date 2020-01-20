@@ -1,5 +1,6 @@
 from colorama import init, Fore
 from grid import *
+from bullet import *
 init()
 
 import os
@@ -8,11 +9,19 @@ class person:
 	def __init__(self,r,c):
 		self._r = r
 		self._c = c
+		self._design = [["|","O","|"],[" ","|"," "],["|"," ","|"]]
+
+
+	def initial_placement(self,obj_grid): 
+		rows = obj_grid.get_grid_rows()
+		for i in range(self._r,self._r+3):
+			for j in range(self._c,self._c + 3):
+				obj_grid.set_grid(i,j,self._design[i- self._r][j - self._c])	
 
 class mandalorian(person):
 	def __init__(self,r,c):
 		person.__init__(self,r,c)
-		self.__design = [["|","O","|"],[" ","|"," "],["|"," ","|"]]
+		# self.__design = [["|","O","|"],[" ","|"," "],["|"," ","|"]]
 		self.__design_jet = [["|","O","|"],[" ","|"," "],["M"," ","M"]]
 		self.__design_shield = [["|","O","|","#"],[" ","|"," ","#"],["|"," ","|","#"]]
 		self.__design_shield_jet = [["|","O","|","#"],[" ","|"," ","#"],["M"," ","M","#"]]
@@ -27,15 +36,16 @@ class mandalorian(person):
 		self.__powerup = 0
 		self.__powerup_start_time = 0
 		self.__powerup_max_time = 20
+		self.__bullets = []
 
 
 
 	
-	def initial_placement(self,obj_grid): 
-		rows = obj_grid.get_grid_rows()
-		for i in range(self._r,self._r+3):
-			for j in range(0,3):
-				obj_grid.set_grid(i,j,self.__design[i- rows + 6][j])
+	# def initial_placement(self,obj_grid): 
+	# 	rows = obj_grid.get_grid_rows()
+	# 	for i in range(self._r,self._r+3):
+	# 		for j in range(self._c,self._c + 3):
+	# 			obj_grid.set_grid(i,j,self.__design[i- self._r][j - self._c])
 
 	def disappear_mandalorian(self,obj_grid):
 		if self.__shield == 0:
@@ -53,14 +63,15 @@ class mandalorian(person):
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
 					obj_grid.set_grid(i,j,self.__design_jet[i-self._r][j-self._c])
+
 		if self.__shield == 0 and jet == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
-					obj_grid.set_grid(i,j,self.__design[i-self._r][j-self._c])
+					obj_grid.set_grid(i,j,self._design[i-self._r][j-self._c])
 		
 		if self.__shield == 1 and jet == 1:
 			for i in range(self._r,self._r+3):
-				for j in range(self._c,self._c+3):
+				for j in range(self._c,self._c+4):
 					obj_grid.set_grid(i,j,self.__design_shield_jet[i-self._r][j-self._c])						
 		
 		if self.__shield == 1 and jet == 0:
@@ -77,11 +88,19 @@ class mandalorian(person):
 	def get_shield(self):
 		return self.__shield
 
+	def unset_shield(self,time):
+		self.__shield = 0
+		self.__shield_end_time = time
+
+
 	def get_row(self):
 		return self._r
 
 	def get_column(self):
 		return self._c
+
+	def dec_life(self):	
+		self.__lives -= 1	
 
 	def change_column(self,n):
 		self._c += n
@@ -96,9 +115,11 @@ class mandalorian(person):
 			self.__shield_start_time = time
 
 
-	def check_shield(self,time):
+	def check_shield(self,time,obj_grid):
 		if self.__shield == 1 and (self.__shield_start_time - time) > self.__shield_max_time:
 			self.__shield = 0
+			for i in range(3):
+				obj_grid.set_grid(self._r + i,self._c+3,' ')
 			self.__shield_end_time = time
 
 		if self.__shield == 0 and (self.__shield_end_time - time)  > self.__shield_max_wait_time:
@@ -169,7 +190,8 @@ class mandalorian(person):
 							for ii in range(obj_grid.get_grid_rows()-1):
 								for jj in range(j-4,50+j):
 									if obj_grid.get_grid(ii,jj) == '*':
-										obj_grid.set_grid(ii,jj," ")								
+										obj_grid.set_grid(ii,jj," ")
+													
 
 
 		elif self.__shield == 1:
@@ -186,8 +208,81 @@ class mandalorian(person):
 											obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
 
 							self.__shield = 0
+							for i in range(3):
+								obj_grid.set_grid(self._r + i,self._c+3,' ')
 
-		flag = 0																							 
+
+		flag = 0
+
+	def shoot(self,obj_grid):
+		if self.__shield == 0:
+			obj_bullet = bullet(self._r + 1 , self._c + 3 , 1)
+
+		if self.__shield == 1:
+			obj_bullet = bullet(self._r + 1 , self._c + 4 , 1)
+
+		obj_bullet.reappear_bullet(obj_grid)
+		self.__bullets.append(obj_bullet)
+
+	def move_bullets(self,obj_grid,start,screen_columns,obj_boss_enemy,time):
+		for i in self.__bullets:
+			if i.get_bullet_column() + 2 > start + screen_columns -1:
+				i.disappear_bullet(obj_grid)
+				self.__bullets.remove(i)
+			else:
+				i.disappear_bullet(obj_grid)
+				m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+				if self.__powerup == 0:
+					if m == 2 or m == 3:
+						if m == 2:
+							self.__coins += 5
+						else:
+							self.__coins += 100	
+						self.__bullets.remove(i)
+					else:	
+						m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+						if m == 2 or m == 3:
+							if m == 2:
+								self.__coins += 5
+							else:
+								self.__coins += 100
+							self.__bullets.remove(i)
+						else:	
+							i.reappear_bullet(obj_grid)
+
+				else:
+					if m == 2:
+						self.__coins += 5
+						self.__bullets.remove(i)
+					else:	
+						m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+						if m == 2:
+							self.__coins += 5
+							self.__bullets.remove(i)
+						else:	
+							m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+							if m == 2:
+								self.__coins += 5
+								self.__bullets.remove(i)
+							else:	
+								m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+								if m == 2:
+									self.__coins += 5
+									self.__bullets.remove(i)
+								else:	
+									m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+									if m == 2:
+										self.__coins += 5
+										self.__bullets.remove(i)
+									else:	
+										m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+										if m == 2:
+											self.__coins += 5
+											self.__bullets.remove(i)
+										else:	
+											i.reappear_bullet(obj_grid)
+
+
 
 																
 

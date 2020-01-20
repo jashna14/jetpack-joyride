@@ -11,8 +11,9 @@ class grid:
 	def __init__(self,rows, columns):
 		self.__rows = rows
 		self.__columns = columns
-		self.__matrix = np.empty([self.__rows,self.__columns] ,dtype='str')
-		self.__matrix[:] = ' '
+		# self.__matrix = np.empty([self.__rows,self.__columns] ,dtype='str')
+		# self.__matrix[:] = ' '
+		self.__matrix = [[" " for i in range(self.__columns)]for j in range(self.__rows)]
 		self.__coinshelves = []
 		self.__obstacle_h = []
 		self.__obstacle_v = []
@@ -32,7 +33,7 @@ class grid:
 
 	def create_roof(self):
 		for i in range(self.__columns):
-			self.__matrix[0][i] = '^'
+			self.__matrix[0][i] = Fore.RED + '^' + Fore.WHITE	
 			self.__matrix[1][i] = '-' 
 
 	def create_floor(self):
