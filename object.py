@@ -160,7 +160,8 @@ class magnet(object):
 		
 			elif pos[1] + 2 < mc:
 				# obj_mandalorian.change_column(max(-1,-1*(mc - pos[1] - 2)))
-				for k in range(3):
+				cnt = min((1,(mc - pos[1] - 2)))
+				for k in range(cnt):
 					obj_mandalorian.change_column(-1)
 					obj_mandalorian.check_coin_collision(obj_grid)
 					obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
