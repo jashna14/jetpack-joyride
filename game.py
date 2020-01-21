@@ -61,45 +61,76 @@ def move_mandalorian(last_up):
 		if obj_mandalorian.get_shield() == 0:
 			if obj_mandalorian.get_column() + 3 < screen_columns+start:
 				obj_mandalorian.disappear_mandalorian(obj_grid)
-				obj_mandalorian.change_column(+1)
+				if obj_grid.get_grid(obj_mandalorian.get_row(),obj_mandalorian.get_column()+3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 1,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 2,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+					obj_mandalorian.change_column(+1)
+				change = 0	
 				if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//10 + 1 < screen_rows - 5:
-					obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+					# obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+					change = (obj_mandalorian.get_row() - last_up)//10 + 1
 				elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
-					obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+					change = screen_rows - 6 - obj_mandalorian.get_row()
 					last_up = screen_rows - 6	
-				obj_mandalorian.check_coin_collision(obj_grid)
-				obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+					# obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+
+				for j in range(change):
+					if obj_grid.get_grid(obj_mandalorian.get_row()+3,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+						obj_mandalorian.change_row(+1)					
+						obj_mandalorian.check_coin_collision(obj_grid)
+						obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
+						obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+					else:
+						break	
 				obj_mandalorian.reappear_mandalorian(obj_grid,0)
 
 		elif obj_mandalorian.get_shield() == 1:
 			if obj_mandalorian.get_column() + 4 < screen_columns+start:
 				obj_mandalorian.disappear_mandalorian(obj_grid)
-				obj_mandalorian.change_column(+1)
+				if obj_grid.get_grid(obj_mandalorian.get_row(),obj_mandalorian.get_column()+4) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 1,obj_mandalorian.get_column() + 4) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 2,obj_mandalorian.get_column() + 4) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+					obj_mandalorian.change_column(+1)
+				change = 0	
 				if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//10 + 1 < screen_rows - 5:
-					obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+					# obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+					change = (obj_mandalorian.get_row() - last_up)//10 + 1
 				elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
-					obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
-					last_up = screen_rows - 6
-				obj_mandalorian.check_coin_collision(obj_grid)
-				obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+					change = screen_rows - 6 - obj_mandalorian.get_row()
+					last_up = screen_rows - 6 	
+					# obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+
+				for j in range(change):
+					if obj_grid.get_grid(obj_mandalorian.get_row()+3,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+						obj_mandalorian.change_row(+1)					
+						obj_mandalorian.check_coin_collision(obj_grid)
+						obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
+						obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+					else:
+						break	
 				obj_mandalorian.reappear_mandalorian(obj_grid,0)			
 
 	elif ch == 'a':
 
+		obj_mandalorian.disappear_mandalorian(obj_grid)
 		if obj_mandalorian.get_column() - 2 >= start:
-			obj_mandalorian.disappear_mandalorian(obj_grid)
-			obj_mandalorian.change_column(-2)
-			if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//10 + 1 < screen_rows - 5:
-				obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
-			elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
-				obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())	
-				last_up = screen_rows - 6
-			obj_mandalorian.check_coin_collision(obj_grid)
-			obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-			obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
-			obj_mandalorian.reappear_mandalorian(obj_grid,0)
+			if obj_grid.get_grid(obj_mandalorian.get_row(),obj_mandalorian.get_column()-2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 1,obj_mandalorian.get_column() -2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 2,obj_mandalorian.get_column() -2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+				obj_mandalorian.change_column(-2)
+		
+		change = 0	
+		if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//10 + 1 < screen_rows - 5:
+			# obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+			change = (obj_mandalorian.get_row() - last_up)//10 + 1
+		elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
+			change = screen_rows - 6 - obj_mandalorian.get_row()
+			last_up = screen_rows - 6 	
+			# obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+
+		for j in range(change):
+			if obj_grid.get_grid(obj_mandalorian.get_row()+3,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+				obj_mandalorian.change_row(+1)					
+				obj_mandalorian.check_coin_collision(obj_grid)
+				obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
+				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+			else:
+				break	
+		obj_mandalorian.reappear_mandalorian(obj_grid,0)		
 
 	elif ch == ' ':
 		if 	obj_mandalorian.get_column() + 3 < screen_columns + start:
@@ -116,36 +147,48 @@ def move_mandalorian(last_up):
 	elif ch == 's':
 		obj_mandalorian.shoot(obj_grid)
 		obj_mandalorian.disappear_mandalorian(obj_grid)
+		change = 0	
 		if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//4 + 1 < screen_rows - 5:
-			obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//4 + 1)
+			# obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+			change = (obj_mandalorian.get_row() - last_up)//4 + 1
 		elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
-			obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+			change = screen_rows - 6 - obj_mandalorian.get_row()
 			last_up = screen_rows - 6	
-		obj_mandalorian.check_coin_collision(obj_grid)
-		obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-		obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+			# obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
+
+		for j in range(change):
+			if obj_grid.get_grid(obj_mandalorian.get_row()+3,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+				obj_mandalorian.change_row(+1)					
+				obj_mandalorian.check_coin_collision(obj_grid)
+				obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
+				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+			else:
+				break	
 		obj_mandalorian.reappear_mandalorian(obj_grid,0)	
 		
 
 
 	else:
-		if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//4 + 1 < screen_rows - 5:
-			obj_mandalorian.disappear_mandalorian(obj_grid)
-			obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//4 + 1)
-			obj_mandalorian.check_coin_collision(obj_grid)
-			obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-			obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
-			obj_mandalorian.reappear_mandalorian(obj_grid,0)
 
+		obj_mandalorian.disappear_mandalorian(obj_grid)
+		change = 0	
+		if obj_mandalorian.get_row() + (obj_mandalorian.get_row() - last_up)//10 + 1 < screen_rows - 5:
+			# obj_mandalorian.change_row((obj_mandalorian.get_row() - last_up)//10 + 1)
+			change = (obj_mandalorian.get_row() - last_up)//10 + 1
 		elif screen_rows - 6 - obj_mandalorian.get_row() > 0:
-			obj_mandalorian.disappear_mandalorian(obj_grid)
-			obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
-			last_up = screen_rows - 6
-			obj_mandalorian.check_coin_collision(obj_grid)
-			obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-			obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
-			obj_mandalorian.reappear_mandalorian(obj_grid,0)
+			change = screen_rows - 6 - obj_mandalorian.get_row()
+			last_up = screen_rows - 6 	
+			# obj_mandalorian.change_row(screen_rows - 6 - obj_mandalorian.get_row())
 
+		for j in range(change):
+			if obj_grid.get_grid(obj_mandalorian.get_row()+3,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() + 3,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
+				obj_mandalorian.change_row(+1)					
+				obj_mandalorian.check_coin_collision(obj_grid)
+				obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
+				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+			else:
+				break	
+		obj_mandalorian.reappear_mandalorian(obj_grid,0)
 	return last_up													
 
 cur_time = lambda: int(round(time.time() * 1000))
@@ -165,10 +208,7 @@ while obj_mandalorian.get_lives() and (vir_time//1 > 0) and obj_boss_enemy.get_l
 
 	if cur_time() - prev_time3 > 100:
 		obj_mandalorian.disappear_mandalorian(obj_grid)
-		last_up = obj_magnet.check_magnet_range(screen_columns,start,obj_mandalorian,last_up)
-		obj_mandalorian.check_coin_collision(obj_grid)
-		obj_mandalorian.check_powerup_collision(obj_grid,vir_time//1)
-		obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
+		last_up = obj_magnet.check_magnet_range(screen_columns,start,obj_mandalorian,last_up,obj_grid,vir_time//1)
 		obj_mandalorian.reappear_mandalorian(obj_grid,0)
 		prev_time3 = cur_time()
 

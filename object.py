@@ -115,7 +115,7 @@ class magnet(object):
 				obj_grid.set_grid(self._position[j][0] + 1,self._position[j][1] + 1, Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL)
 
 	
-	def check_magnet_range(self,screen_columns,start,obj_mandalorian,last_up):
+	def check_magnet_range(self,screen_columns,start,obj_mandalorian,last_up,obj_grid,vir_time):
 		
 		flag = 0
 		mr = obj_mandalorian.get_row()
@@ -135,22 +135,36 @@ class magnet(object):
 				# obj_mandalorian.change_row(min(1,14 - mr - 3))
 				obj_mandalorian.change_row(1)
 				last_up += 1
+				obj_mandalorian.check_coin_collision(obj_grid)
+				obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
+				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time)
 				
 
 			elif mr > 14+2:
-				obj_mandalorian.change_row(max(-3,-1*(mr - 14 - 2)))
-				# obj_mandalorian.change_row(-3)
-				last_up += max(-3,-1*(mr - 14 - 2))
+				cnt = max(-3,-1*(mr - 14 - 2))
+				for k in range(-1*cnt):
+					obj_mandalorian.change_row(-1)
+					last_up -= 1
+					obj_mandalorian.check_coin_collision(obj_grid)
+					obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
+					obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time)
 				
 
 			
 			if pos[1] > mc+3:
 				# obj_mandalorian.change_column(min(1,pos[1] - mc - 3))
 				obj_mandalorian.change_column(+1)
-
+				obj_mandalorian.check_coin_collision(obj_grid)
+				obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
+				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time)
+		
 			elif pos[1] + 2 < mc:
 				# obj_mandalorian.change_column(max(-1,-1*(mc - pos[1] - 2)))
-				obj_mandalorian.change_column(-3)
+				for k in range(3):
+					obj_mandalorian.change_column(-1)
+					obj_mandalorian.check_coin_collision(obj_grid)
+					obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
+					obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time)
 
 		return last_up		
 
