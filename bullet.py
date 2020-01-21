@@ -20,7 +20,7 @@ class bullet:
 
 	def reappear_bullet(self,obj_grid):
 		current_char = obj_grid.get_grid(self.__r,self.__c)
-		if current_char == Fore.YELLOW + Style.BRIGHT + "$" + Fore.WHITE + Style.RESET_ALL or current_char == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
+		if current_char == Fore.YELLOW + Style.BRIGHT + "$" + Fore.WHITE + Style.RESET_ALL or current_char == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL or current_char == Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL or "<":
 			self.__previous = current_char
 		else:
 			self.__previous = ' '
@@ -34,13 +34,13 @@ class bullet:
 		if self.__person == 1:
 			self.__c += 1
 			if self.__c < obj_grid.get_grid_columns():
-				if obj_grid.get_grid(self.__r,self.__c) == '*':
+				if obj_grid.get_grid(self.__r,self.__c) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
 					i = self.__r
 					j = self.__c
 					for ii in range(8):
 						for jj in range(8):
 							if (i-4 + ii)> -1 and (i-4 + ii) < obj_grid.get_grid_rows() + 1 and (j-4+jj) > -1 and (j-4+jj) < obj_grid.get_grid_columns():
-								if obj_grid.get_grid(i-4 + ii,j-4 + jj) == '*':
+								if obj_grid.get_grid(i-4 + ii,j-4 + jj) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
 									obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
 					return 2
 
