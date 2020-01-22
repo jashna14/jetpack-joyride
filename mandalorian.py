@@ -287,28 +287,45 @@ class mandalorian(person):
 						if m == 2:
 							self.__coins += 5
 							self.__bullets.remove(i)
-						else:	
-							m = i.move_bullet(obj_grid,obj_boss_enemy,time)
-							if m == 2:
-								self.__coins += 5
-								self.__bullets.remove(i)
-							else:	
+						else:
+							if i.get_bullet_column() + 1 <= start + screen_columns -1:
 								m = i.move_bullet(obj_grid,obj_boss_enemy,time)
 								if m == 2:
 									self.__coins += 5
 									self.__bullets.remove(i)
-								else:	
-									m = i.move_bullet(obj_grid,obj_boss_enemy,time)
-									if m == 2:
-										self.__coins += 5
-										self.__bullets.remove(i)
-									else:	
+								else:
+									if i.get_bullet_column() + 1 <= start + screen_columns -1:
 										m = i.move_bullet(obj_grid,obj_boss_enemy,time)
 										if m == 2:
 											self.__coins += 5
 											self.__bullets.remove(i)
 										else:	
-											i.reappear_bullet(obj_grid)
+											if i.get_bullet_column() + 1 <= start + screen_columns -1:
+												m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+												if m == 2:
+													self.__coins += 5
+													self.__bullets.remove(i)
+												else:
+													if i.get_bullet_column() + 1 <= start + screen_columns -1:
+
+														m = i.move_bullet(obj_grid,obj_boss_enemy,time)
+														if m == 2:
+															self.__coins += 5
+															self.__bullets.remove(i)
+														else:	
+															i.reappear_bullet(obj_grid)
+													else:		
+														self.__bullets.remove(i)
+
+											else:
+												self.__bullets.remove(i)
+														
+									else:
+										self.__bullets.remove(i)
+													
+							else:
+								self.__bullets.remove(i)
+													
 
 
 

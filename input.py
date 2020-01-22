@@ -1,5 +1,4 @@
 from getch import _getChUnix as getChar
-# from __future__ import print_function
 import signal
 
 class AlarmException(Exception):

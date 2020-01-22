@@ -53,7 +53,7 @@ def move_mandalorian(last_up):
 					obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
 					obj_mandalorian.reappear_mandalorian(obj_grid,1)
 
-		elif obj_mandalorian.get_shield() == 1:
+			elif obj_mandalorian.get_shield() == 1:
 				if obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column() + 3) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
 					obj_mandalorian.disappear_mandalorian(obj_grid)
 					last_up -= 1 
