@@ -1,4 +1,4 @@
-# SAVE THE YODA(Inspired by Jetpack-Joyride) - "Terminal-based version"
+# SAVE MASTER YODA(Inspired by Jetpack-Joyride) - "Terminal-based version"
 
 ## About :-
 ```
