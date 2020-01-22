@@ -150,14 +150,14 @@ class mandalorian(person):
 				for j in range(self._c,self._c+3):
 					if obj_grid.get_grid(i,j) == Fore.YELLOW + Style.BRIGHT + '$' + Fore.WHITE + Style.RESET_ALL:
 						self.__coins = self.__coins + 1
-						playsound('resources/sound/coin_pickup_1.wav')
+						playsound('resources/coin_pickup_1.wav')
 
 		elif self.__shield == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					if obj_grid.get_grid(i,j) == Fore.YELLOW + Style.BRIGHT + '$' + Fore.WHITE + Style.RESET_ALL:
 						self.__coins = self.__coins + 1
-						playsound('resources/sound/coin_pickup_1.wav')	
+						playsound('resources/coin_pickup_1.wav')	
 
 	def check_powerup_collision(self,obj_grid,time):
 		flag = 0
@@ -173,7 +173,7 @@ class mandalorian(person):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns():
 										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
-						playsound('resources/sound/powerup_collect.wav')	
+						playsound('resources/powerup_collect.wav')	
 
 
 		elif self.__shield == 1:
@@ -188,7 +188,7 @@ class mandalorian(person):
 									if (i-2 + ii)> -1 and (i-2 + ii) < obj_grid.get_grid_rows() + 1 and (j-2+jj) > -1 and (j-2+jj) < obj_grid.get_grid_columns()  :
 										if obj_grid.get_grid(i-2 + ii,j-2 + jj) == Fore.CYAN + Style.BRIGHT + '@' + Style.RESET_ALL:
 											obj_grid.set_grid(i-2 + ii,j-2 + jj," ")
-						playsound('resources/sound/powerup_collect.wav')	
+						playsound('resources/powerup_collect.wav')	
 						
 	def check_powerup(self,time):
 		if	self.__powerup_start_time - time > self.__powerup_max_time:
@@ -211,7 +211,7 @@ class mandalorian(person):
 								for jj in range(j-4,50+j):
 									if obj_grid.get_grid(ii,jj) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
 										obj_grid.set_grid(ii,jj," ")
-							playsound('resources/sound/player_hurt_2.wav')
+							playsound('resources/player_hurt_2.wav')
 
 													
 
@@ -229,7 +229,7 @@ class mandalorian(person):
 										if obj_grid.get_grid(i-4 + ii,j-4 + jj) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
 											obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
 
-							playsound('resources/sound/player_hurt_2.wav')
+							playsound('resources/player_hurt_2.wav')
 
 							self.__shield = 0
 							for i in range(3):
@@ -237,48 +237,7 @@ class mandalorian(person):
 
 
 		flag = 0
-	
-
-	# def check_magnet_collision(self,obj_grid,start,time):
-	# 	flag = 0
-	# 	if self.__shield == 0:
-	# 		for i in range(self._r,self._r+3):
-	# 			for j in range(self._c,self._c+3):
-	# 				if obj_grid.get_grid(i,j) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
-	# 					if flag == 0:
-	# 						flag = 1
-	# 						self.__lives = self.__lives - 1
-	# 						self.__powerup = 0
-	# 						for ii in range(obj_grid.get_grid_rows()-1):
-	# 							for jj in range(j-4,50+j):
-	# 								if obj_grid.get_grid(ii,jj) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
-	# 									obj_grid.set_grid(ii,jj," ")
-	# 						playsound('resources/sound/player_hurt_2.wav')
-
-													
-
-
-	# 	elif self.__shield == 1:
-	# 		for i in range(self._r,self._r+3):
-	# 			for j in range(self._c,self._c+4):
-	# 				if obj_grid.get_grid(i,j) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
-	# 					if flag == 0: 
-	# 						flag = 1
-	# 						self.__shield_end_time = time
-	# 						for ii in range(8):
-	# 							for jj in range(8):
-	# 								if (i-4 + ii)> -1 and (i-4 + ii) < obj_grid.get_grid_rows() + 1 and (j-4+jj) > -1 and (j-4+jj) < obj_grid.get_grid_columns()  :
-	# 									if obj_grid.get_grid(i-4 + ii,j-4 + jj) == Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL:
-	# 										obj_grid.set_grid(i-4 + ii,j-4 + jj," ")
-
-	# 						playsound('resources/sound/player_hurt_2.wav')
-
-	# 						self.__shield = 0
-	# 						for i in range(3):
-	# 							obj_grid.set_grid(self._r + i,self._c+3,' ')
-
-
-	# 	flag = 0		
+		
 
 	def shoot(self,obj_grid):
 		if self.__shield == 0:
@@ -288,7 +247,7 @@ class mandalorian(person):
 			obj_bullet = bullet(self._r + 1 , self._c + 4 , 1)
 
 		obj_bullet.reappear_bullet(obj_grid)
-		playsound('resources/sound/light_hit_03.wav')
+		playsound('resources/light_hit_03.wav')
 		self.__bullets.append(obj_bullet)
 
 	def move_bullets(self,obj_grid,start,screen_columns,obj_boss_enemy,time):
