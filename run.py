@@ -35,7 +35,7 @@ def play():
 	magnet_arr = create_magnet(obj_grid,screen_columns,3)
 
 	start = 0
-	vir_time = 400
+	vir_time = 600
 
 
 	def move_mandalorian(last_up):

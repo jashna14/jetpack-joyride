@@ -1,11 +1,9 @@
-# JETPACK-JOYRIDE - "Terminal-based version"
-
-## **Coded by** :- *Naman Baheti*
+# SAVE THE YODA(Inspired by Jetpack-Joyride) - "Terminal-based version"
 
 ## About :-
 ```
 Jetpack Joyride is a 2011 side-scrolling endless runner action video game created by Halfbrick Studios. The game features the same protagonist from Monster Dash, Barry Steakfries, who the player controls as he steals a jet pack from a top-secret laboratory. The game has been met with very favorable reviews, and has won numerous awards. 
-This is a terminal version of the 'Super Mario Bros' game. It exhibits Object-Oriented Programming concepts like encapsulation, inheritance, abstraction and polymorphism.
+This is a terminal version of the 'Jetpack-Joyride' game. It exhibits Object-Oriented Programming concepts like encapsulation, inheritance, abstraction and polymorphism.
 ```
 ## Pre-requisites :-
 ```
@@ -28,7 +26,7 @@ foo@bar:~$ pip3 install colorama
 
 * Use 'w', 'a' and 'd' to control player.
 
-* Use 'f' to fire bullets.
+* Use 's' to fire bullets.
 
 * Use 'Space' to activate shield around player.
 
@@ -42,22 +40,17 @@ This game consists of one level. You will see that this game is quite a replica 
 
 * He is the main player of the game.
 
-* Has 3 lives. If the case, Mandolian is respawned always at the current position  of him.
+* Has 5 lives. Mandolian is respawned always at the current position  of him.
 
-* Has 300 seconds to complete the game.
+* Can activate shield to protect itself from obstacles
 
 * Can fire bullets.
 
-### Scenery
+### Grid
 
 * background keeps changing
 
-* It contains clouds, obstacles, coins
-![Background](./b.png)
-### Coins
-* Comes randomly at any point 
-
-* Player score increases on collecting it
+* Has Floor and Roof 
 
 ### Beams
 
@@ -106,15 +99,14 @@ This game consists of one level. You will see that this game is quite a replica 
 
 * Used to shield Mandolian from obstacles and iceballs
 
-* refills at every 60 seconds
+* refills at every 60 unit time
 
-* Once occupied, it lasts for 10 seconds
+* Once occupied, it lasts for 10 unit time
 
 * If Mandolian collides with obstacle or iceball, shield disappears saving one life of Mandolian
 
 * can be occupied by pressing 'Space' if shieldmode is True
 
-* Mandolian color changes on occupying Shield
 
 ### Speed_booster
 
@@ -122,16 +114,16 @@ This game consists of one level. You will see that this game is quite a replica 
 
 * Game speed increases on collecting it
 
-* Once occupied, it lasts for 10 seconds
+* Once occupied, it lasts for 10 unit time
 
-### Color 
-
-* Different colors are given to different components of the game
-
-* Black coloured background is given
 
 ### Score 
 
-* Increases on destroying beams, collecting coins
+* Increases on destroying beams, collecting coins and beating the Boss-enemy
 
-* Is a function of destroyed beams, collected coins and bullets fired at boss_enemy
+
+### SPECIAL FEATURES 
+
+* Different colors are given to different components of the game
+* Sound has been added
+* ASCII Art has been used
