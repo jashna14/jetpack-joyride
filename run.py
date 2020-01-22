@@ -21,7 +21,7 @@ def play():
 
 	screen_rows = 30
 	screen_columns = 141
-	grid_columns = 300
+	grid_columns = 1000
 	obj_grid = grid(screen_rows,grid_columns)
 	obj_grid.create_roof()
 	obj_grid.create_floor()
