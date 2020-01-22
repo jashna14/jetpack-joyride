@@ -21,7 +21,7 @@ def play():
 
 	screen_rows = 30
 	screen_columns = 141
-	grid_columns = 1000
+	grid_columns = 300
 	obj_grid = grid(screen_rows,grid_columns)
 	obj_grid.create_roof()
 	obj_grid.create_floor()
@@ -342,7 +342,37 @@ def play():
 		for i in range(25):
 			print()
 						
-	elif obj_boss_enemy.get_lives() <= 0:	
+	elif obj_boss_enemy.get_lives() <= 0:
+		while(obj_mandalorian.get_column() != obj_grid.get_grid_columns() - 4):
+			obj_boss_enemy.disappear_boss_enemy(obj_grid)
+			if cur_time() - prev_time1 > 20:
+				prev_time1 = cur_time()
+				obj_mandalorian.disappear_mandalorian(obj_grid)
+				obj_mandalorian.change_column(+1)
+				obj_mandalorian.reappear_mandalorian(obj_grid,0)
+				print("\033[0;0H",end = "")
+				st=""
+				for i in range(obj_grid.get_grid_rows()):
+					for j in range(start,screen_columns+start):
+						st += obj_grid.get_grid(i,j)
+					st+="\n"
+				print(st)	
+				print("\033[0K",end = "")
+				st1 = ""	
+				st1 = st1 + "💵 :" + 	str(obj_mandalorian.get_coins()) + "  " + "lives = " 
+				for i in range(obj_mandalorian.get_lives()):
+					st1 = st1 + '❤️  '
+				for i in range(obj_mandalorian.get_max_lives() - obj_mandalorian.get_lives()):
+					st1 = st1 + '   '	
+				st1 = st1 + " " + "enemy_lives = "
+				for i in range(obj_boss_enemy.get_lives()):
+					st1 = st1 + '❤️  '
+				for i in range(obj_boss_enemy.get_max_lives() - obj_boss_enemy.get_lives()):
+					st1 = st1 + '   '	 
+				st1 = st1 +  "  " + "time remaining = " + str(vir_time//1) + "  " + "shield = " + str(obj_mandalorian.get_shield_availability()) + "\n"
+				print(st1,end = "\r")
+
+
 		with open('resources/youwin_ascii.txt') as f:
 			while True:
 				c = f.read(1)
