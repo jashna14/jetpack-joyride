@@ -36,7 +36,7 @@ Din is a mandalorian living in the post-empire era. He is one of the last remain
 This game consists of one level. You will see that this game is quite a replica of the original game. You win when you defeat the **Boss enemy**. Rest of the details are stated below explicitly for each element of the game.
 ```
 
-### Mandolian
+### Mandalorian
 
 * He is the main player of the game.
 

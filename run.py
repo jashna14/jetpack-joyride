@@ -45,7 +45,7 @@ def play():
 
 		ch = user_input()
 
-		if ch == 'w':
+		if ch == 'w' or ch == 'W':
 			if obj_mandalorian.get_row() - 1 > 1:
 				if obj_mandalorian.get_shield() == 0:
 					if obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column()) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column() + 1) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL and obj_grid.get_grid(obj_mandalorian.get_row() - 1,obj_mandalorian.get_column() + 2) != Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL:
@@ -67,7 +67,7 @@ def play():
 						obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
 						obj_mandalorian.reappear_mandalorian(obj_grid,1)				 	
 
-		elif ch == 'd':
+		elif ch == 'd' or ch == 'D':
 
 			if obj_mandalorian.get_shield() == 0:
 				if obj_mandalorian.get_column() + 3 < screen_columns+start:
@@ -121,7 +121,7 @@ def play():
 							break	
 					obj_mandalorian.reappear_mandalorian(obj_grid,0)			
 
-		elif ch == 'a':
+		elif ch == 'a'  or ch == 'S':
 
 			obj_mandalorian.disappear_mandalorian(obj_grid)
 			if obj_mandalorian.get_column() - 2 >= start:
@@ -172,10 +172,15 @@ def play():
 					obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time//1)
 					obj_mandalorian.reappear_mandalorian(obj_grid,0)
 
-		elif ch == 'q':
+		elif ch == 'q' or ch == 'Q':
+			os.system('clear')
+			print(Style.BRIGHT + Fore.RED + 'Terminating Game ...' + Style.RESET_ALL)
+			for i in range(30):
+				print()
+			time.sleep(1.5)
 			sys.exit(0)
 
-		elif ch == 's':
+		elif ch == 's' or ch == 'S':
 			obj_mandalorian.shoot(obj_grid)
 			obj_mandalorian.disappear_mandalorian(obj_grid)
 			change = 0	
@@ -411,28 +416,28 @@ print(
     '>> : Press ' +
     Style.BRIGHT +
     Fore.CYAN +
-    'W' +
+    'w' +
     Style.RESET_ALL +
     ' to move UP')
 print(
     '>> : Press ' +
     Style.BRIGHT +
     Fore.CYAN +
-    'D' +
+    'd' +
     Style.RESET_ALL +
     ' to move RIGHT')
 print(
     '>> : Press ' +
     Style.BRIGHT +
     Fore.CYAN +
-    'A' +
+    'a' +
     Style.RESET_ALL +
     ' to move LEFT')
 print(
     '>> : Press ' +
     Style.BRIGHT +
     Fore.CYAN +
-    'S' +
+    's' +
     Style.RESET_ALL +
     ' to SHOOT')
 print(
@@ -446,7 +451,7 @@ print(
     '>> : Press ' +
     Style.BRIGHT +
     Fore.CYAN +
-    'Q' +
+    'q' +
     Style.RESET_ALL +
     ' to Exit')
 
@@ -455,6 +460,14 @@ choice = input('OPTION : ')
 if choice ==  'p' or choice ==  'P':
 	print("\033[0;0H",end = "")
 	play()
+
+elif choice == 'q' or choice == 'Q':
+	os.system('clear')
+	print(Style.BRIGHT + Fore.RED + 'Terminating Game ...' + Style.RESET_ALL)
+	for i in range(30):
+		print()
+	time.sleep(1.5)
+	sys.exit(0)	
 else:
     os.system('clear')
     print(Style.BRIGHT + Fore.RED + 'INVALID OPTION' + Style.RESET_ALL)
