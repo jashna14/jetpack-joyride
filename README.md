@@ -21,7 +21,7 @@ foo@bar:~$ pip3 install colorama
 * Run the following command to start the game.
 
     ```
-    foo@bar:~$ python3 run.py
+     	$ python3 run.py
     ```
 
 * Use 'w', 'a' and 'd' to control player.
