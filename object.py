@@ -103,8 +103,8 @@ def create_magnet(obj_grid,screen_columns,cnt):
 	count = 0
 	i = 1
 	while i < cnt:
-		if 1*(i+1)*screen_columns < grid_columns - screen_columns:
-			obj = magnet(14 , randint((i*1*screen_columns), (1*(i+1)*screen_columns)))
+		if 2*(i+1)*screen_columns < grid_columns - screen_columns:
+			obj = magnet(14 , randint((i*2*screen_columns), (2*(i+1)*screen_columns)))
 			magnet_arr.append(obj)			
 			if 	obj_grid.get_grid(obj._r,obj._c) != Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL and obj_grid.get_grid(obj._r,obj._c+1) != Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL and obj_grid.get_grid(obj._r + 1,obj._c) != Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL and obj_grid.get_grid(obj._r + 1,obj._c+1) != Fore.RED + Style.BRIGHT + '*' + Style.RESET_ALL and obj_grid.get_grid(obj._r,obj._c) != Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL and obj_grid.get_grid(obj._r,obj._c+1) != Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL and obj_grid.get_grid(obj._r + 1,obj._c) != Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL and obj_grid.get_grid(obj._r + 1,obj._c+1) != Fore.CYAN + Style.BRIGHT + "@" + Style.RESET_ALL:
 				count +=  1
@@ -119,6 +119,7 @@ def create_magnet(obj_grid,screen_columns,cnt):
 		obj_grid.set_grid(j._r,j._c + 1 , Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL)				
 		obj_grid.set_grid(j._r + 1,j._c ,  Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL)				
 		obj_grid.set_grid(j._r + 1,j._c + 1, Fore.MAGENTA + Style.BRIGHT + "%" + Style.RESET_ALL)
+		print(j._r,j._c)
 
 	return magnet_arr	
 
@@ -171,7 +172,7 @@ def check_magnet_range(screen_columns,start,obj_mandalorian,last_up,obj_grid,vir
 			# obj_mandalorian.change_column(max(-1,-1*(mc - pos[1] - 2)))
 			cnt = min((2,(mc - pos._c - 2)))
 			for k in range(cnt):
-				obj_mandalorian.change_column(-2)
+				obj_mandalorian.change_column(-1)
 				obj_mandalorian.check_coin_collision(obj_grid)
 				obj_mandalorian.check_powerup_collision(obj_grid,vir_time)
 				obj_mandalorian.check_obstacle_collision(obj_grid,start,vir_time)

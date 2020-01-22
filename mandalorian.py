@@ -42,6 +42,7 @@ class mandalorian(person):
 		self.__powerup_start_time = 0
 		self.__powerup_max_time = 20
 		self.__bullets = []
+		self.__previous = []
 
 		for i in range(3):
 			for j in range(3):
@@ -71,22 +72,23 @@ class mandalorian(person):
 					obj_grid.set_grid(i,j," ")			
 
 	def reappear_mandalorian(self,obj_grid,jet):
+		
 		if self.__shield == 0 and jet == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
 					obj_grid.set_grid(i,j,self.__design_jet[i-self._r][j-self._c])
 
-		if self.__shield == 0 and jet == 0:
+		elif self.__shield == 0 and jet == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+3):
 					obj_grid.set_grid(i,j,self._design[i-self._r][j-self._c])
 		
-		if self.__shield == 1 and jet == 1:
+		elif self.__shield == 1 and jet == 1:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					obj_grid.set_grid(i,j,self.__design_shield_jet[i-self._r][j-self._c])						
 		
-		if self.__shield == 1 and jet == 0:
+		elif self.__shield == 1 and jet == 0:
 			for i in range(self._r,self._r+3):
 				for j in range(self._c,self._c+4):
 					obj_grid.set_grid(i,j,self.__design_shield[i-self._r][j-self._c])					
