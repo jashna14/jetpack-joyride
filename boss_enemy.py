@@ -1,4 +1,4 @@
-from colorama import init, Fore
+from colorama import init, Fore , Style
 from grid import *
 from bullet import *
 from mandalorian import *
@@ -10,6 +10,12 @@ class boss_enemy(person):
 	def __init__(self,r,c):
 		person.__init__(self,r,c)
 		self.__design = [[' ', ' ', 'M', 'M', ' ', ' '],['<', '[', 'W', 'W', ']', '>'],[' ', '~', '}', '{', '~', ' '],]
+		for i in range(3):
+			for j in range(6):
+				if i == 0:
+					self.__design[i][j] = Fore.MAGENTA + Style.BRIGHT + self.__design[i][j] + Style.RESET_ALL
+				else:
+					self.__design[i][j] = Fore.CYAN + Style.BRIGHT + self.__design[i][j] + Style.RESET_ALL	
 		self.__lives = 5
 		self.__max_lives = 5
 		self.__bullets = []

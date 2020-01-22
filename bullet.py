@@ -1,6 +1,6 @@
 import os
 import random
-from colorama import init, Fore , Style
+from colorama import init, Fore , Style 
 from random import seed
 from random import randint
 import numpy as np
@@ -14,9 +14,9 @@ class bullet:
 		self.__previous = ' '
 		self.__person = person
 		if person == 1:
-			self.__design = 'o'
+			self.__design = Fore.GREEN +  Style.BRIGHT + 'o' + Style.RESET_ALL
 		elif person == 2:
-			self.__design = '<'	
+			self.__design = Fore.RED +  Style.BRIGHT + '<' + Style.RESET_ALL	
 
 	def reappear_bullet(self,obj_grid):
 		current_char = obj_grid.get_grid(self.__r,self.__c)
@@ -57,9 +57,7 @@ class bullet:
 
 			if obj_person.get_shield() == 1:
 				if self.__r >= obj_person.get_row() and self.__r < obj_person.get_row()+3 and self.__c >= obj_person.get_column() and self.__c < obj_person.get_column()+4:
-					# obj_person.dec_life()
 					obj_person.unset_shield(time)
-					# obj_person.__shield_end_time = time + 90
 					for i in range(3):
 						obj_grid.set_grid(obj_person.get_row() + i,obj_person.get_column() + 3,' ')
 					return 3		
