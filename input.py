@@ -1,6 +1,5 @@
 from getch import _getChUnix as getChar
 import signal
-
 class AlarmException(Exception):
     pass
 def alarmhandler(signum, frame):
